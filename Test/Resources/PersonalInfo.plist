@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>Estefania Barrios Aragon</string>
+	<key>Image</key>
+	<string></string>
+	<key>Texts</key>
+	<dict>
+		<key>2003</key>
+		<string>In 2003 I left my home town, Estepona, and I moved to Malaga to start a degree in Computer Science.</string>
+		<key>2008</key>
+		<string>Five years later, fascinated by the Augmented Reality technology, I joined Arpa Solutions as an intern.</string>
+		<key>2014</key>
+		<string>In 2014 I lived one of the most special moments in my life: I went to Silicon Valley to attend a congress as an exhibitor and speaker.</string>
+	</dict>
+</dict>
+</plist>

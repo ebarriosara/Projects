@@ -26,7 +26,13 @@
 		28408E5F19CDA327002F1033 /* InfoImages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28408E5E19CDA327002F1033 /* InfoImages.plist */; };
 		28408E6219CDA4CF002F1033 /* PicturesLibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28408E6119CDA4CF002F1033 /* PicturesLibraryTableViewController.m */; };
 		28408E6519CDA5E1002F1033 /* PicturesLibraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28408E6419CDA5E1002F1033 /* PicturesLibraryTableViewCell.m */; };
-		28408E6719CDBBE4002F1033 /* amy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28408E6619CDBBE4002F1033 /* amy.jpg */; };
+		28408E6D19CDD5DE002F1033 /* ImageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28408E6C19CDD5DE002F1033 /* ImageDetailsViewController.m */; };
+		28408E7019CDEDB4002F1033 /* ImportImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28408E6F19CDEDB4002F1033 /* ImportImageViewController.m */; };
+		28408E7219CE077C002F1033 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 28408E7119CE077C002F1033 /* Background.png */; };
+		28408E7419CE0843002F1033 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28408E7319CE0843002F1033 /* Icon.png */; };
+		28408E7619CE08AB002F1033 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28408E7519CE08AB002F1033 /* Icon.png */; };
+		28408E7819CE1C12002F1033 /* PersonalInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28408E7719CE1C12002F1033 /* PersonalInfo.plist */; };
+		28408E7B19CE1DCA002F1033 /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28408E7A19CE1DCA002F1033 /* PersonalInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +73,16 @@
 		28408E6119CDA4CF002F1033 /* PicturesLibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicturesLibraryTableViewController.m; sourceTree = "<group>"; };
 		28408E6319CDA5E1002F1033 /* PicturesLibraryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicturesLibraryTableViewCell.h; sourceTree = "<group>"; };
 		28408E6419CDA5E1002F1033 /* PicturesLibraryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicturesLibraryTableViewCell.m; sourceTree = "<group>"; };
-		28408E6619CDBBE4002F1033 /* amy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = amy.jpg; path = Resources/amy.jpg; sourceTree = "<group>"; };
+		28408E6B19CDD5DE002F1033 /* ImageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetailsViewController.h; sourceTree = "<group>"; };
+		28408E6C19CDD5DE002F1033 /* ImageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetailsViewController.m; sourceTree = "<group>"; };
+		28408E6E19CDEDB4002F1033 /* ImportImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportImageViewController.h; sourceTree = "<group>"; };
+		28408E6F19CDEDB4002F1033 /* ImportImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportImageViewController.m; sourceTree = "<group>"; };
+		28408E7119CE077C002F1033 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Background.png; path = Resources/Background.png; sourceTree = "<group>"; };
+		28408E7319CE0843002F1033 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
+		28408E7519CE08AB002F1033 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		28408E7719CE1C12002F1033 /* PersonalInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PersonalInfo.plist; path = Resources/PersonalInfo.plist; sourceTree = "<group>"; };
+		28408E7919CE1DCA002F1033 /* PersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoViewController.h; sourceTree = "<group>"; };
+		28408E7A19CE1DCA002F1033 /* PersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +112,7 @@
 		28408E1619CD9D3A002F1033 = {
 			isa = PBXGroup;
 			children = (
+				28408E7519CE08AB002F1033 /* Icon.png */,
 				28408E2819CD9D3A002F1033 /* Test */,
 				28408E4C19CD9D3A002F1033 /* TestTests */,
 				28408E2119CD9D3A002F1033 /* Frameworks */,
@@ -137,6 +153,12 @@
 				28408E6119CDA4CF002F1033 /* PicturesLibraryTableViewController.m */,
 				28408E6319CDA5E1002F1033 /* PicturesLibraryTableViewCell.h */,
 				28408E6419CDA5E1002F1033 /* PicturesLibraryTableViewCell.m */,
+				28408E6B19CDD5DE002F1033 /* ImageDetailsViewController.h */,
+				28408E6C19CDD5DE002F1033 /* ImageDetailsViewController.m */,
+				28408E6E19CDEDB4002F1033 /* ImportImageViewController.h */,
+				28408E6F19CDEDB4002F1033 /* ImportImageViewController.m */,
+				28408E7919CE1DCA002F1033 /* PersonalInfoViewController.h */,
+				28408E7A19CE1DCA002F1033 /* PersonalInfoViewController.m */,
 				28408E2919CD9D3A002F1033 /* Supporting Files */,
 			);
 			path = Test;
@@ -178,8 +200,10 @@
 		28408E5D19CDA31E002F1033 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				28408E6619CDBBE4002F1033 /* amy.jpg */,
+				28408E7319CE0843002F1033 /* Icon.png */,
+				28408E7119CE077C002F1033 /* Background.png */,
 				28408E5E19CDA327002F1033 /* InfoImages.plist */,
+				28408E7719CE1C12002F1033 /* PersonalInfo.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -260,7 +284,10 @@
 				28408E3919CD9D3A002F1033 /* Default-568h@2x.png in Resources */,
 				28408E3C19CD9D3A002F1033 /* MainStoryboard.storyboard in Resources */,
 				28408E5F19CDA327002F1033 /* InfoImages.plist in Resources */,
-				28408E6719CDBBE4002F1033 /* amy.jpg in Resources */,
+				28408E7219CE077C002F1033 /* Background.png in Resources */,
+				28408E7419CE0843002F1033 /* Icon.png in Resources */,
+				28408E7619CE08AB002F1033 /* Icon.png in Resources */,
+				28408E7819CE1C12002F1033 /* PersonalInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +327,9 @@
 				28408E3F19CD9D3A002F1033 /* MainMenuViewController.m in Sources */,
 				28408E6219CDA4CF002F1033 /* PicturesLibraryTableViewController.m in Sources */,
 				28408E6519CDA5E1002F1033 /* PicturesLibraryTableViewCell.m in Sources */,
+				28408E6D19CDD5DE002F1033 /* ImageDetailsViewController.m in Sources */,
+				28408E7019CDEDB4002F1033 /* ImportImageViewController.m in Sources */,
+				28408E7B19CE1DCA002F1033 /* PersonalInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +510,7 @@
 				28408E5919CD9D3A002F1033 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28408E5A19CD9D3A002F1033 /* Build configuration list for PBXNativeTarget "TestTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +519,7 @@
 				28408E5C19CD9D3A002F1033 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

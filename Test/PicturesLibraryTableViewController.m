@@ -5,8 +5,10 @@
 
 #import "PicturesLibraryTableViewController.h"
 #import "PicturesLibraryTableViewCell.h"
+#import "ImageDetailsViewController.h"
 
 @interface PicturesLibraryTableViewController () {
+    // Array with the meta-information of the images
     NSArray * infoImages;
 }
 
@@ -33,44 +35,12 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSString * path = [[NSBundle mainBundle] pathForResource:@"InfoImages" ofType:@"plist"];
-    infoImages = [NSArray arrayWithContentsOfFile:path];
-    
-    //[self downloadImagesInBackground];
-    
-}
-
-- (void)downloadImagesInBackground {
-    
+    // Get the meta-information of the images from the Document Directory.
+    // This information is stored in the file named InfoImages.plist.    
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documentsDirectory = [paths objectAtIndex:0];
-
-    for (int i = 0; i < [infoImages count]; i++) {
-        
-        
-        NSDictionary * dict = [infoImages objectAtIndex:i];
-        
-        // Check if the image has already been downloaded. We will save all the images with jpg format
-        NSString * imPath = [documentsDirectory stringByAppendingPathComponent:[[dict objectForKey:@"Name"] stringByAppendingString:@".jpg"]];
-        
-        if (![[NSFileManager defaultManager] fileExistsAtPath:imPath]) {
-            
-            NSLog(@"File %@ doesn't exist", [dict objectForKey:@"Name"]);
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-            dispatch_async(queue, ^{
-                NSData * data = [NSData dataWithContentsOfURL:[dict objectForKey:@"URL"]];
-                UIImage * image = [UIImage imageWithData:data];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                });
-            });
-            
-        } else {
-            
-            NSLog(@"File %@ exists", [dict objectForKey:@"Name"]);
-        }
-        
-        
-    }
+    NSString * documentDirectory = [paths objectAtIndex:0];
+    NSString * path = [documentDirectory stringByAppendingPathComponent:@"InfoImages.plist"];    
+    infoImages = [NSArray arrayWithContentsOfFile:path];
     
 }
 
@@ -78,6 +48,34 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// Update the meta-information with a new size when the user imports a new image
+- (void)updateMetaInfoForIndex:(int)index withSize:(int)size {
+
+    // Get the path of the InfoImages.plist file
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentDirectory = [paths objectAtIndex:0];
+    NSString * path = [documentDirectory stringByAppendingPathComponent:@"InfoImages.plist"];
+    
+    // Get the current version of the file
+    NSMutableArray * array = [NSMutableArray arrayWithContentsOfFile:path];
+    
+    // Add the dictionary to the array with the meta-information
+    NSMutableDictionary * dict = [array objectAtIndex:index];
+    [dict setObject:[NSString stringWithFormat:@"%d bytes", size] forKey:@"Size"];
+    
+    [array replaceObjectAtIndex:index withObject:[NSDictionary dictionaryWithDictionary:dict]];
+    
+    // Replace the content of the InfoImages.plist with the new array
+    [array writeToFile:path atomically:YES];
+    
+    // Update the infoImages
+    infoImages = [NSArray arrayWithContentsOfFile:path];
+    
+    // Reload the data to update the rows
+    [self.tableView reloadData];
+    
 }
 
 #pragma mark - Table view data source
@@ -99,7 +97,8 @@
     static NSString *CellIdentifier = @"Cell";
     PicturesLibraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    // Configure the cell...    
+    
     // Get the meta-information of the image
     NSDictionary * dict = [infoImages objectAtIndex:[indexPath row]];
     // Set the name
@@ -120,24 +119,33 @@
         
         NSLog(@"The image %@ doesn't exist", [dict objectForKey:@"Name"]);
         
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
         dispatch_async(queue, ^{
             NSURL * url = [NSURL URLWithString:[dict objectForKey:@"URL"]];
             NSData * data = [NSData dataWithContentsOfURL:url];
             UIImage * image = [UIImage imageWithData:data];
             dispatch_async(dispatch_get_main_queue(), ^{
+                
                 // Assign the image in the main UI thread
                 PicturesLibraryTableViewCell * cellVisible = (id)[tableView cellForRowAtIndexPath:indexPath];
                 if (cellVisible) {
                     // Update the cell only if it is visible. It might be invisible when the image finishes downloading
                     cellVisible.imageView.image = image;
                 }
+                
+                // If the image has been imported to the library by the user, we need to update its size
+                // in the meta-information
+                if ([[dict objectForKey:@"Size"] isEqualToString:@"0 bytes"]) {
+                    [self updateMetaInfoForIndex:[indexPath row] withSize:[data length]];
+                }
             });
         
-            // Finally, save the image in the documents directory for the next time.
+            // Finally, check that any other thread has saved the same image and save the image in the documents directory for the next time.
             // We will use jpg format
-            [UIImageJPEGRepresentation(image, 1.0) writeToFile:imPath atomically:YES];
-
+            if (![[NSFileManager defaultManager] fileExistsAtPath:imPath]) {
+                [UIImageJPEGRepresentation(image, 1.0) writeToFile:imPath atomically:YES];
+            }
+            
         });
 
     } else {
@@ -150,6 +158,20 @@
     }
     
     return cell;
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"showImage"]) {
+        // When the user selects a row, the segue will be performed.
+        // We need to set the meta-information of the selected image
+        // before the Image Details view controller appears.
+        NSIndexPath * indexPath = [self.tableView indexPathForSelectedRow];
+        ImageDetailsViewController * vc = [segue destinationViewController];
+        vc.dictImage = [infoImages objectAtIndex:[indexPath row]];
+    }
+    
 }
 
 /*

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Q18-uJ-Gug">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--Main Menu View Controller-->
+        <scene sceneID="5">
+            <objects>
+                <viewController id="2" customClass="MainMenuViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNx-m9-xKI">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pictures Library">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="RJi-cg-BuK" kind="push" id="7Ls-0y-JKs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlH-xs-TLE">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Import Image">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Please, select an option:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dth-JO-3He">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="197" id="ZtG-AN-nZC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dth-JO-3He" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="I4N-gn-o1J"/>
+                            <constraint firstItem="gNx-m9-xKI" firstAttribute="top" secondItem="3" secondAttribute="top" constant="162" id="PI7-te-dqj"/>
+                            <constraint firstItem="gNx-m9-xKI" firstAttribute="leading" secondItem="Dth-JO-3He" secondAttribute="leading" type="default" id="Yyd-DM-Lx5"/>
+                            <constraint firstItem="nlH-xs-TLE" firstAttribute="leading" secondItem="gNx-m9-xKI" secondAttribute="leading" type="default" id="c9v-dJ-GAh"/>
+                            <constraint firstAttribute="bottom" secondItem="nlH-xs-TLE" secondAttribute="bottom" constant="164" id="eJ2-LG-O37"/>
+                            <constraint firstItem="Dth-JO-3He" firstAttribute="top" secondItem="3" secondAttribute="top" constant="66" id="rhH-0u-Xh2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GMs-d8-uBd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-34" y="-101"/>
+        </scene>
+        <!--Pictures Library Table View Controller - Pictures Library-->
+        <scene sceneID="R4O-sx-HoF">
+            <objects>
+                <tableViewController id="RJi-cg-BuK" customClass="PicturesLibraryTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="VWi-IO-TVx">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="wau-bi-O0a" customClass="PicturesLibraryTableViewCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-bS-WNL">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="140" id="p6P-hR-Ild"/>
+                                                <constraint firstAttribute="height" constant="90" id="sai-sw-gXX"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="155" translatesAutoresizingMaskIntoConstraints="NO" id="gsx-7q-kkq">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="155" id="Tdh-rc-Hp3"/>
+                                                <constraint firstAttribute="height" constant="54" id="vCy-3x-ZIP"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="gsx-7q-kkq" firstAttribute="top" secondItem="wau-bi-O0a" secondAttribute="top" constant="25" id="fcM-61-mbH"/>
+                                    <constraint firstItem="LFY-bS-WNL" firstAttribute="leading" secondItem="wau-bi-O0a" secondAttribute="leading" constant="5" id="qDP-ug-r19"/>
+                                    <constraint firstItem="LFY-bS-WNL" firstAttribute="centerY" secondItem="wau-bi-O0a" secondAttribute="centerY" type="default" id="uav-rD-76a"/>
+                                    <constraint firstItem="gsx-7q-kkq" firstAttribute="leading" secondItem="wau-bi-O0a" secondAttribute="leading" constant="158" id="uwK-rb-WOt"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="LFY-bS-WNL" id="oID-T2-4CI"/>
+                                    <outlet property="lbName" destination="gsx-7q-kkq" id="DMj-4F-Rql"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RJi-cg-BuK" id="RPQ-F4-upj"/>
+                            <outlet property="delegate" destination="RJi-cg-BuK" id="qU7-GU-xYf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Pictures Library" id="adK-mU-zwm"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3xJ-v1-Oqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="348" y="-103"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qww-ih-Zfs">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="Q18-uJ-Gug" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fHJ-dR-qx3">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="vHw-GE-Mlx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="duz-zm-6MZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-435" y="-101"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="MainMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainMenuViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PicturesLibraryTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PicturesLibraryTableViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PicturesLibraryTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PicturesLibraryTableViewController.h"/>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

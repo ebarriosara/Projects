@@ -105,7 +105,6 @@
     cell.lbName.text = [dict objectForKey:@"Name"];
     
     // Set the image
-    cell.imageView.image = nil;
     
     // Firstly, check if the image has already been downloaded and saved in the document directory
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -115,9 +114,10 @@
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:imPath]) {
         
-        // The image hasn't been downloaded before, so download it in background
+        // The image hasn't been downloaded before, so set the placeholder image and download in background
         
-        NSLog(@"The image %@ doesn't exist", [dict objectForKey:@"Name"]);
+        NSString * path = [[NSBundle mainBundle] pathForResource:@"PlaceholderImage" ofType:@"png"];
+        cell.imageView.image = [UIImage imageWithContentsOfFile:path];
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
         dispatch_async(queue, ^{

@@ -33,6 +33,8 @@
 		28408E7619CE08AB002F1033 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28408E7519CE08AB002F1033 /* Icon.png */; };
 		28408E7819CE1C12002F1033 /* PersonalInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28408E7719CE1C12002F1033 /* PersonalInfo.plist */; };
 		28408E7B19CE1DCA002F1033 /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28408E7A19CE1DCA002F1033 /* PersonalInfoViewController.m */; };
+		28408E7E19CECB75002F1033 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28408E7C19CECB75002F1033 /* photo.jpg */; };
+		28408E7F19CECB75002F1033 /* PlaceholderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 28408E7D19CECB75002F1033 /* PlaceholderImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		28408E7719CE1C12002F1033 /* PersonalInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PersonalInfo.plist; path = Resources/PersonalInfo.plist; sourceTree = "<group>"; };
 		28408E7919CE1DCA002F1033 /* PersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoViewController.h; sourceTree = "<group>"; };
 		28408E7A19CE1DCA002F1033 /* PersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoViewController.m; sourceTree = "<group>"; };
+		28408E7C19CECB75002F1033 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo.jpg; path = Resources/photo.jpg; sourceTree = "<group>"; };
+		28408E7D19CECB75002F1033 /* PlaceholderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlaceholderImage.png; path = Resources/PlaceholderImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,8 @@
 		28408E5D19CDA31E002F1033 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				28408E7C19CECB75002F1033 /* photo.jpg */,
+				28408E7D19CECB75002F1033 /* PlaceholderImage.png */,
 				28408E7319CE0843002F1033 /* Icon.png */,
 				28408E7119CE077C002F1033 /* Background.png */,
 				28408E5E19CDA327002F1033 /* InfoImages.plist */,
@@ -288,6 +294,8 @@
 				28408E7419CE0843002F1033 /* Icon.png in Resources */,
 				28408E7619CE08AB002F1033 /* Icon.png in Resources */,
 				28408E7819CE1C12002F1033 /* PersonalInfo.plist in Resources */,
+				28408E7E19CECB75002F1033 /* photo.jpg in Resources */,
+				28408E7F19CECB75002F1033 /* PlaceholderImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

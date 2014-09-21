@@ -2,9 +2,6 @@
 //  ImportImageViewController.m
 //  Test
 //
-//  Created by Gemma Prado Robles on 20/09/14.
-//
-//
 
 #import "ImportImageViewController.h"
 

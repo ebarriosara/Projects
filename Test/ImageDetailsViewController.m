@@ -38,12 +38,18 @@
     NSString * imPath = [documentDirectory stringByAppendingPathComponent:[[self.dictImage objectForKey:@"Name"] stringByAppendingString:@".jpg"]];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:imPath]) {
+    
         // Set the image
         self.imageView.image = [UIImage imageWithContentsOfFile:imPath];
-    }
+    
+    } else {
 
-    // If the image hasn't been saved, we do nothing because it should be downloading in background.
-    // The user will have to go back to the library and select the row again to see it.
+        // If the image hasn't been saved, we show the placeholder image because it should be downloading in background.
+        // The user will have to go back to the library and select the row again to see it.
+        NSString * path = [[NSBundle mainBundle] pathForResource:@"PlaceholderImage" ofType:@"png"];
+        self.imageView.image = [UIImage imageWithContentsOfFile:path];
+        
+    }
     
     // The scrollView will be used to do the zooming and panning
     self.scrollView.contentSize = self.imageView.frame.size;
@@ -66,11 +72,13 @@
 
 #pragma mark - UIScrollView Delegate
 
+// These method allows the user to zoom and tap
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imageView;
 }
 
+// This method centers the image once the user zooms in or out
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
     
     CGSize size = view.frame.size;

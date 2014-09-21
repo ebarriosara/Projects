@@ -2,9 +2,6 @@
 //  PersonalInfoViewController.h
 //  Test
 //
-//  Created by Gemma Prado Robles on 20/09/14.
-//
-//
 
 #import <UIKit/UIKit.h>
 
@@ -14,5 +11,8 @@
 @property (nonatomic, retain) IBOutlet UILabel * lbName;
 @property (nonatomic, retain) IBOutlet UITextView * tvInfo;
 @property (nonatomic, retain) IBOutlet UIImageView * imageView;
+
+// Method triggered when the UISlider changes
+- (IBAction)sliderValueChanged:(id)sender;
 
 @end

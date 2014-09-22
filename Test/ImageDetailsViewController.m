@@ -37,27 +37,116 @@
     NSString * documentDirectory = [paths objectAtIndex:0];
     NSString * imPath = [documentDirectory stringByAppendingPathComponent:[[self.dictImage objectForKey:@"Name"] stringByAppendingString:@".jpg"]];
     
+    // Get the image that will be shown
+    UIImage * image;
+    
     if ([[NSFileManager defaultManager] fileExistsAtPath:imPath]) {
     
-        // Set the image
-        self.imageView.image = [UIImage imageWithContentsOfFile:imPath];
+        image = [UIImage imageWithContentsOfFile:imPath];
     
     } else {
 
         // If the image hasn't been saved, we show the placeholder image because it should be downloading in background.
         // The user will have to go back to the library and select the row again to see it.
         NSString * path = [[NSBundle mainBundle] pathForResource:@"PlaceholderImage" ofType:@"png"];
-        self.imageView.image = [UIImage imageWithContentsOfFile:path];
+        image = [UIImage imageWithContentsOfFile:path];
         
     }
     
-    // The scrollView will be used to do the zooming and panning
-    self.scrollView.contentSize = self.imageView.frame.size;
-    self.scrollView.minimumZoomScale = 1.0;
-    self.scrollView.maximumZoomScale = 3.0;
+    // Create the imageView
+    self.imageView = [[UIImageView alloc] initWithImage:image];
+    self.imageView.frame = (CGRect){.origin=CGPointMake(0.0f, 0.0f), .size=image.size};
+    [self.scrollView addSubview:self.imageView];
+    
+    // Set the size of the scrollView
+    self.scrollView.contentSize = image.size;
+    
+    // Add gesture recognizers to detect when the user taps
+    UITapGestureRecognizer * doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewDoubleTapped:)];
+    doubleTapRecognizer.numberOfTapsRequired = 2;
+    doubleTapRecognizer.numberOfTouchesRequired = 1;
+    [self.scrollView addGestureRecognizer:doubleTapRecognizer];
+    
+    UITapGestureRecognizer * twoFingerTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTwoFingerTapped:)];
+    twoFingerTapRecognizer.numberOfTapsRequired = 1;
+    twoFingerTapRecognizer.numberOfTouchesRequired = 2;
+    [self.scrollView addGestureRecognizer:twoFingerTapRecognizer];
+    
+    // Set the scrollView's delegate
     self.scrollView.delegate = self;
     
-    [self.scrollView setZoomScale:1.0];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    // Update the scale of the scrollView depending on the size of its image
+    CGRect scrollViewFrame = self.scrollView.frame;
+    CGFloat scaleWidth = scrollViewFrame.size.width / self.scrollView.contentSize.width;
+    CGFloat scaleHeight = scrollViewFrame.size.height / self.scrollView.contentSize.height;
+    CGFloat minScale = MIN(scaleWidth, scaleHeight);
+    self.scrollView.minimumZoomScale = minScale;
+    self.scrollView.maximumZoomScale = 2.0f;
+    self.scrollView.zoomScale = minScale;
+    
+    // Center the contents of the scrollView
+    [self centerScrollView];
+}
+
+// Center the contents of the scrollView
+- (void)centerScrollView {
+    
+    CGSize boundsSize = self.scrollView.bounds.size;
+    CGRect contentsFrame = self.imageView.frame;
+    
+    if (contentsFrame.size.width < boundsSize.width) {
+        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+    } else {
+        contentsFrame.origin.x = 0.0f;
+    }
+    
+    if (contentsFrame.size.height < boundsSize.height) {
+        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+    } else {
+        contentsFrame.origin.y = 0.0f;
+    }
+    
+    self.imageView.frame = contentsFrame;
+}
+
+// Method triggered when the user taps with two fingers
+- (void)scrollViewTwoFingerTapped:(UITapGestureRecognizer*)recognizer {
+
+    // Zoom out smoothly
+    CGFloat newZoomScale = self.scrollView.zoomScale / 1.5f;
+    newZoomScale = MAX(newZoomScale, self.scrollView.minimumZoomScale);
+    [self.scrollView setZoomScale:newZoomScale animated:YES];
+
+}
+
+// Method triggered when the user double taps
+- (void)scrollViewDoubleTapped:(UITapGestureRecognizer*)recognizer {
+   
+    // Get the location where the user thas tapped
+    CGPoint pointInView = [recognizer locationInView:self.imageView];
+    
+    // Calculate the new scale
+    CGFloat newZoomScale = self.scrollView.zoomScale * 1.5f;
+    newZoomScale = MIN(newZoomScale, self.scrollView.maximumZoomScale);
+    
+    // Set the size
+    CGSize scrollViewSize = self.scrollView.bounds.size;
+    
+    CGFloat w = scrollViewSize.width / newZoomScale;
+    CGFloat h = scrollViewSize.height / newZoomScale;
+    CGFloat x = pointInView.x - (w / 2.0f);
+    CGFloat y = pointInView.y - (h / 2.0f);
+    
+    CGRect rectToZoomTo = CGRectMake(x, y, w, h);
+    
+    [self.scrollView zoomToRect:rectToZoomTo animated:YES];
+    
 }
 
 #pragma mark - Events
@@ -78,18 +167,11 @@
     return self.imageView;
 }
 
-// This method centers the image once the user zooms in or out
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
-    
-    CGSize size = view.frame.size;
-    if (size.height >= self.scrollView.frame.size.height) {
-        self.scrollView.contentInset = UIEdgeInsetsZero;
-    } else {
-        CGFloat delta = self.scrollView.frame.size.height/2 - view.frame.size.height/2;
-        self.scrollView.contentInset = UIEdgeInsetsMake(delta, 0, delta, 0);
-    }
-    
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    // Center the contents when the user zooms
+    [self centerScrollView];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

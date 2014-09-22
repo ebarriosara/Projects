@@ -150,8 +150,6 @@
 
     } else {
         
-        NSLog(@"The image %@ exists", [dict objectForKey:@"Name"]);
-        
         // If the image has been downloaded, assign it
         cell.imageView.image = [UIImage imageWithContentsOfFile:imPath];
         
